@@ -1,0 +1,8 @@
+.article__title {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.article__title:hover {
+    text-decoration: underline;
+}
