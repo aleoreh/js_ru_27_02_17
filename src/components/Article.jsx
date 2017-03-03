@@ -25,10 +25,10 @@ class Article extends Component {
             return res;
         };
 
-        const showComments = (open) => {
+        const showComments = () => {
             const comments = map(showComment, article.comments);
             const res =
-                open ?
+                commentsOpen ?
                 (comments.length === 0 ?
                  <div>No comments yet</div> :
                  comments) :
@@ -41,11 +41,11 @@ class Article extends Component {
             <div className="article__body">
                 <div className="article__text">{article.text}</div>
                 <div className="article__comments comments">
-                    <a href="#"
+                    <div className="article__hideshow"
                        onClick={this.handleShowCommentsClick}>
                         show/hide comments
-                    </a>
-                    {showComments(commentsOpen)}
+                    </div>
+                    {showComments()}
                 </div>
             </div> :
             null;

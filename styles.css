@@ -6,3 +6,13 @@
 .article__title:hover {
     text-decoration: underline;
 }
+
+.article__hideshow {
+    display: inline-block;
+    cursor: pointer;
+    color: #5283ad;
+}
+
+.article__hideshow:hover {
+    text-decoration: underline;
+}
