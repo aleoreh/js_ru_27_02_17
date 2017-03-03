@@ -25,10 +25,16 @@ class Article extends Component {
             return res;
         };
 
-        const comments =
-            commentsOpen ?
-            map(showComment, article.comments) :
-            null;
+        const showComments = (open) => {
+            const comments = map(showComment, article.comments);
+            const res =
+                open ?
+                (comments.length === 0 ?
+                 <div>No comments yet</div> :
+                 comments) :
+                null;
+            return res;
+        };
 
         const articleBody =
             isOpen ?
@@ -39,7 +45,7 @@ class Article extends Component {
                        onClick={this.handleShowCommentsClick}>
                         show/hide comments
                     </a>
-                    {comments}
+                    {showComments(commentsOpen)}
                 </div>
             </div> :
             null;
