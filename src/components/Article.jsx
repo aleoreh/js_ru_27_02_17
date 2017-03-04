@@ -1,7 +1,10 @@
-import {map} from "futils";
+import {map, merge} from "futils";
 import React, {Component} from "react";
 
 import Comment from "./Comment.jsx";
+
+
+const initArticle = {comments: []};
 
 class Article extends Component {
 
@@ -14,7 +17,7 @@ class Article extends Component {
     }
 
     render() {
-        const {article} = this.props;
+        const article = merge(initArticle, this.props.article); // we need comments in the article!
         const {isOpen, commentsOpen} = this.state;
 
         const showComment = (comment) => {
