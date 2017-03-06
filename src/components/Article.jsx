@@ -12,6 +12,7 @@ class Article extends Component {
         super();
         this.state = {
             isOpen: false,
+          //Лучше внести этот стейт в CommentList
             commentsOpen: false
         };
     }
