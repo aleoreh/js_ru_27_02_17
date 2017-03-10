@@ -6,7 +6,6 @@ class CustomDayPicker extends Component {
     constructor(props) {
         super(props);
         this.handleDayClick = this.handleDayClick.bind(this);
-        this.handleResetClick = this.handleResetClick.bind(this);
     }
 
     state = {
