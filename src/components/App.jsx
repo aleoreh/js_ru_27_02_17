@@ -3,6 +3,11 @@ import ArticleList from './ArticleList/index'
 import Chart from './Chart'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import CustomDayPicker from "./CustomDayPicker.jsx";
+
+const sundays = (day) => {
+    return day.getDay() === 0;
+};
 
 class App extends Component {
     static propTypes = {
@@ -11,7 +16,7 @@ class App extends Component {
 
     state = {
         text: '',
-        selected: null
+        selected: null,
     }
 
     render() {
@@ -22,6 +27,7 @@ class App extends Component {
         }))
         return (
             <div>
+                <CustomDayPicker />
                 Enter your name: <input type="text" value={this.state.text} onChange={this.handleTextChange}/>
                 <Select options = {options} value={this.state.selected} onChange = {this.handleSelectChange} multi/>
                 <ArticleList articles={this.props.articles}/>
