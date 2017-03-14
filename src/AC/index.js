@@ -1,4 +1,4 @@
-import {INCREMENT, DELETE_ARTICLE} from '../constants'
+import {INCREMENT, DELETE_ARTICLE, SELECT_ARTICLE} from '../constants'
 
 export function increment() {
     const action = {
@@ -14,4 +14,11 @@ export function deleteArticle(id) {
         type: DELETE_ARTICLE,
         payload: { id }
     }
+}
+
+export function selectArticle(payload) {
+    return {
+        type: SELECT_ARTICLE,
+        payload: {selected: payload}
+    };
 }

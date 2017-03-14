@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import {connect} from 'react-redux'
 import Select from 'react-select'
+import {selectArticle} from "../../AC/index.js";
 
 import 'react-select/dist/react-select.css'
 
@@ -8,15 +10,12 @@ class SelectFilter extends Component {
         articles: PropTypes.array.isRequired
     };
 
-    state = {
-        selected: null
+    handleChange = (selected) => {
+        this.props.dispatchArticleSelected(selected);
     }
 
-    handleChange = selected => this.setState({ selected })
-
     render() {
-        const { selected } = this.state
-        const { articles } = this.props
+        const { articles, filters } = this.props;
         const options = articles.map(article => ({
             label: article.title,
             value: article.id
@@ -24,11 +23,21 @@ class SelectFilter extends Component {
 
         return <Select
             options={options}
-            value={selected}
+            value={filters.selected}
             multi={true}
             onChange={this.handleChange}
         />
     }
 }
 
-export default SelectFilter
+export default connect(
+    (state) => {
+        return {
+            articles: state.articles,
+            filters: state.filters
+        };
+    },
+    {
+        dispatchArticleSelected: selectArticle
+    }
+)(SelectFilter);
