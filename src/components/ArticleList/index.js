@@ -13,6 +13,7 @@ class ArticleList extends Component {
 
         const articleComponents =
               articles
+                //ок, но еще лучше делать фильтрацию в коннекте
               .filter((article) => filterIds.indexOf(article.id) !== -1)
               .filter((article) => (
                   filterDateRange.from <= new Date(article.date)) &&
