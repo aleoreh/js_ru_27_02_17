@@ -13,6 +13,7 @@ export default (state = initState, action) => {
     switch (type) {
         case SELECT_ARTICLE:
             const selected = payload.selected;
+            //а здесь лучше просто id хранить, а не все что в Select приходит
             return {...state, selected: selected};
         case DAY_CLICK:
             const dateRange = DateUtils.addDayToRange(payload, state.dateRange);
