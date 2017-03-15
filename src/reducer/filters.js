@@ -1,7 +1,9 @@
-// import {SELECT_ARTICLE} from "../constants.js";
+import {SELECT_ARTICLE, DAY_CLICK, DELETE_ARTICLE} from "../constants.js";
+import { DateUtils } from 'react-day-picker'
 
 const initState = {
-    selected: []
+    selected: [],
+    dateRange: {from: null, to: null}
 };
 
 export default (state = initState, action) => {
@@ -9,9 +11,19 @@ export default (state = initState, action) => {
     var res;
 
     switch (type) {
-        case "SELECT_ARTICLE":
+        case SELECT_ARTICLE:
             const selected = payload.selected;
-            return {selected: selected};
+            return {...state, selected: selected};
+        case DAY_CLICK:
+            const dateRange = DateUtils.addDayToRange(payload, state.dateRange);
+            return {...state, dateRange: dateRange};
+        case DELETE_ARTICLE:
+            return {
+                ...state,
+                selected: state.selected.filter(
+                    (article) => article.value !== payload.id
+                )
+            };
         default:
             return state;
     }

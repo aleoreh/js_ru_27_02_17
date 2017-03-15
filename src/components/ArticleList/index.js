@@ -7,9 +7,18 @@ import './style.css'
 
 class ArticleList extends Component {
     render() {
-        const {articles, toggleOpenItem, isItemOpened} = this.props
+        const {articles, toggleOpenItem, isItemOpened, filters} = this.props
+        const filterIds = filters.selected.map((s) => s.value);
+        const filterDateRange = filters.dateRange;
 
-        const articleComponents = articles.map(article => <li key={article.id}>
+        const articleComponents =
+              articles
+              .filter((article) => filterIds.indexOf(article.id) !== -1)
+              .filter((article) => (
+                  filterDateRange.from <= new Date(article.date)) &&
+                      (new Date(article.date) <= filterDateRange.to)
+                     )
+              .map(article => <li key={article.id}>
             <Article article={article}
                      isOpen={isItemOpened(article.id)}
                      toggleOpen={toggleOpenItem(article.id)}
@@ -33,7 +42,8 @@ class ArticleList extends Component {
 const mapStateToProps = state => {
     console.log('---', 'connect, state = ', state)
     return {
-        articles: state.articles
+        articles: state.articles,
+        filters: state.filters
     }
 }
 

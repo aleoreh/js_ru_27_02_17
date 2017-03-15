@@ -4,25 +4,18 @@ import DateRange from './DateRange'
 import {connect} from "react-redux";
 
 class Filters extends Component {
-    static propTypes = {
-        articles: PropTypes.array.isRequired
-    }
+    // static propTypes = {
+    //     articles: PropTypes.array.isRequired
+    // }
 
     render() {
-        const {articles} = this.props;
         return (
             <div>
-                <ArticlesSelect articles={articles}/>
-                <DateRange/>
+                <ArticlesSelect />
+                <DateRange />
             </div>
         )
     }
 }
 
-export default connect(
-    (state) => {
-        return {
-            articles: state.articles
-        };
-    }
-)(Filters)
+export default Filters;
