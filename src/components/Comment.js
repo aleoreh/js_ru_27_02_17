@@ -1,6 +1,6 @@
-import React, {PropTypes}  from 'react'
-import {connect} from 'react-redux'
-import {createFindCommentSelector} from '../selectors'
+import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { createFindCommentSelector } from '../selectors'
 
 function Comment(props) {
     const { text, user } = props.comment

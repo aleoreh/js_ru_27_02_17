@@ -12,7 +12,7 @@ const initComment = I.from({
 });
 
 const initState = I.from({
-    comments: I.from({}),
+    entities: I.from({}),
     loading: false,
     error: null
 });
@@ -22,7 +22,7 @@ export default (state = initState, action) => {
 
     switch (type) {
         case ADD_COMMENT:
-            return state.comments.set(randomId, I.from({
+            return state.entities.set(randomId, I.from({
                 id: randomId,
                 ...payload.comment
             }));
@@ -31,7 +31,7 @@ export default (state = initState, action) => {
         case LOAD_COMMENTS_BY_ARTICLE + SUCCESS:
             const res =
                 state
-                    .set("comments", I.asObject(payload.response, (item) => [item.id, item]))
+                    .set("entities", I.asObject(payload.response, (item) => [item.id, item]))
                     .set("loading", false);
             return res;
         case LOAD_COMMENTS_BY_ARTICLE + FAIL:
