@@ -1,24 +1,44 @@
-import {normalizedComments} from '../fixtures'
-import { ADD_COMMENT } from '../constants'
-import {arrToMap} from './utils'
-import {Record} from 'immutable'
+import { normalizedComments } from '../fixtures';
+import { Record, Map } from 'immutable';
+import * as I from "seamless-immutable";
+import { arrToMap } from './utils';
+import { ADD_COMMENT, LOAD_COMMENTS_BY_ARTICLE, START, SUCCESS, FAIL } from '../constants';
 
-const CommentModel = Record({
+const initComment = I.from({
     id: null,
     user: '',
-    text: ''
-})
+    text: '',
+    loading: false
+});
 
-export default (comments = arrToMap(normalizedComments, CommentModel), action) => {
-    const { type, payload, randomId } = action
+const initState = I.from({
+    comments: I.from({}),
+    loading: false,
+    error: null
+});
+
+export default (state = initState, action) => {
+    const { type, payload, randomId } = action;
 
     switch (type) {
         case ADD_COMMENT:
-            return comments.set(randomId, new CommentModel({
+            return state.comments.set(randomId, I.from({
                 id: randomId,
                 ...payload.comment
-            }))
+            }));
+        case LOAD_COMMENTS_BY_ARTICLE + START:
+            return state.set("loading", true);
+        case LOAD_COMMENTS_BY_ARTICLE + SUCCESS:
+            const res =
+                state
+                    .set("comments", I.asObject(payload.response, (item) => [item.id, item]))
+                    .set("loading", false);
+            return res;
+        case LOAD_COMMENTS_BY_ARTICLE + FAIL:
+            return state
+                .set('error', payload.error.statusText)
+                .set('loading', false);
+        default:
+            return state;
     }
-
-    return comments
 }
