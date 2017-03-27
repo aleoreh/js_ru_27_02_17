@@ -13,6 +13,7 @@ const initComment = I.from({
 
 const initState = I.from({
     entities: I.from({}),
+    //здесь так просто уже не выйдет, ведь ты загружаешь не все комменты сразу, а отдельно для каждой статьи
     loading: false,
     error: null
 });
