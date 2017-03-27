@@ -5,6 +5,7 @@ import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
 import { loadCommentsByArticle } from "../AC/index";
 
+//лоадер показать забыл
 class CommentList extends Component {
 
     static propTypes = {
