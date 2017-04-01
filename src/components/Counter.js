@@ -8,13 +8,19 @@ class Counter extends Component {
         count: PropTypes.number
     };
 
+    static contextTypes = {
+        test: React.PropTypes.string,
+        locale: React.PropTypes.string
+    };
+
     render() {
         const {count} = this.props
         if (count > 5) return <Redirect to="/filters"/>
         return (
             <div>
-                <h3>Count: {count}</h3>
-                <a href="#" onClick={this.handleIncrement}>Increment me</a>
+              <div>Context: {this.context.test}</div>
+              <h3>{(this.context.locale === "ru" ? "Счётчик: " : "Count: ") + count}</h3>
+              <a href="#" onClick={this.handleIncrement}>Increment me</a>
             </div>
         )
     }

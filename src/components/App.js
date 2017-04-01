@@ -16,7 +16,9 @@ class App extends Component {
     };
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        test: PropTypes.string,
+        locale: PropTypes.string
     }
 
     state = {
@@ -25,7 +27,9 @@ class App extends Component {
 
     getChildContext() {
         return {
-            user: this.state.text
+            user: this.state.text,
+            test: "Hello, Context!",
+            locale: "ru"
         }
     }
 
